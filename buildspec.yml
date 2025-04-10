@@ -10,9 +10,8 @@ phases:
 
   build:
     commands:
-      - echo 'Running all Python tests sequentially'
-      - mkdir -p report
-      - python3 -m pytest tests/ --junitxml=report/test_report.xml
+      - echo 'Running Python Tests'
+      - python -m pytest --junitxml=report/test_report.xml
 
   post_build:
     commands:
