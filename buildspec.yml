@@ -16,22 +16,18 @@ phases:
 
   pre_build:
     commands:
-      - echo "Build started on `date`"
+      - echo "Build started on $(date)"
       - echo "Build ID: $CODEBUILD_BUILD_ID"
       - echo "Project Name: $CODEBUILD_PROJECT_NAME"
 
   build:
     commands:
       - echo 'Running Python Tests'
-      - |
-        codebuild-tests-run \
-          --test-command 'python -m pytest --junitxml=report/test_report.xml' \
-          --files-search "codebuild-glob-search 'tests/test_*.py'" \
-          --sharding-strategy 'equal-distribution'
+      - codebuild-tests-run --test-command 'python -m pytest --junitxml=report/test_report.xml' --files-search "codebuild-glob-search 'tests/test_*.py'" --sharding-strategy 'equal-distribution'
 
   post_build:
     commands:
-      - echo "Build completed on `date`"
+      - echo "Build completed on $(date)"
       - echo "Build Status: $CODEBUILD_BUILD_SUCCEEDING"
       - echo "Test execution completed"
 
